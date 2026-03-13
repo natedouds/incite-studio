@@ -24,8 +24,8 @@
   /* NAV */
   nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,10,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0 2rem}
   .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
-  .logo{font-size:1.1rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--light);text-decoration:none}
-  .logo span{color:var(--red)}
+  .logo{display:flex;align-items:center;text-decoration:none}
+  .logo img{height:38px;width:auto;display:block}
   .nav-links{display:flex;gap:2rem;list-style:none}
   .nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
   .nav-links a:hover{color:var(--light)}
@@ -47,6 +47,7 @@
   .hero-eyebrow{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:1.2rem;font-weight:600}
   h1{font-size:clamp(3.2rem,9vw,7.5rem);font-weight:900;letter-spacing:-.02em;line-height:.95;text-transform:uppercase;margin-bottom:1.5rem}
   h1 em{font-style:normal;color:var(--red)}
+  .hero-logo{width:min(480px,80vw);margin:0 auto 2rem;display:block;filter:drop-shadow(0 0 40px rgba(192,57,43,0.5))}
   .hero-sub{font-size:1.1rem;color:var(--muted);max-width:540px;margin:0 auto 2.5rem;line-height:1.7}
   .btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
   .btn{display:inline-block;padding:.75rem 2rem;border-radius:4px;font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:all .2s}
@@ -126,7 +127,7 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="#home" class="logo">Incite<span>.</span>Studio</a>
+    <a href="#home" class="logo"><img src="logo.png" alt="Incite Studio"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -147,7 +148,7 @@
   <div class="hero-grid"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Wexford, Pennsylvania</p>
-    <h1>Incite<br><em>Studio</em></h1>
+    <img src="logo.png" alt="Incite Studio" class="hero-logo">
     <p class="hero-sub">Professional recording, mixing, production, and songwriting — wherever you are in your creative process, we meet you there.</p>
     <div class="btn-row">
       <a href="#about" class="btn btn-primary">Explore Services</a>
