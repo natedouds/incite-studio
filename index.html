@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incite Studio | Recording & Production | Wexford, PA</title>
+<style>
+  :root {
+    --red: #c0392b;
+    --red-light: #e74c3c;
+    --red-glow: rgba(192,57,43,0.35);
+    --dark: #0a0a0a;
+    --dark2: #111111;
+    --dark3: #1a1a1a;
+    --mid: #242424;
+    --light: #f0f0f0;
+    --muted: #888;
+    --accent: #ff3b2f;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--dark);color:var(--light);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+
+  /* NAV */
+  nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,10,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0 2rem}
+  .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-size:1.1rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--light);text-decoration:none}
+  .logo span{color:var(--red)}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--light)}
+  .nav-cta{background:var(--red);color:#fff;padding:.45rem 1.1rem;border-radius:4px;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:background .2s,box-shadow .2s}
+  .nav-cta:hover{background:var(--red-light);box-shadow:0 0 18px var(--red-glow)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--light);transition:all .3s}
+  @media(max-width:768px){
+    .nav-links{display:none;position:absolute;top:64px;left:0;width:100%;background:var(--dark2);flex-direction:column;padding:1.5rem 2rem;gap:1.2rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .nav-links.open{display:flex}
+    .hamburger{display:flex}
+  }
+
+  /* HERO */
+  #home{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:var(--dark2)}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(192,57,43,0.18) 0%,transparent 65%),linear-gradient(180deg,#0a0a0a 0%,#111 100%)}
+  .hero-grid{position:absolute;inset:0;opacity:.06;background-image:linear-gradient(var(--muted) 1px,transparent 1px),linear-gradient(90deg,var(--muted) 1px,transparent 1px);background-size:60px 60px}
+  .hero-content{position:relative;z-index:2;max-width:860px;padding:0 2rem}
+  .hero-eyebrow{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:1.2rem;font-weight:600}
+  h1{font-size:clamp(3.2rem,9vw,7.5rem);font-weight:900;letter-spacing:-.02em;line-height:.95;text-transform:uppercase;margin-bottom:1.5rem}
+  h1 em{font-style:normal;color:var(--red)}
+  .hero-sub{font-size:1.1rem;color:var(--muted);max-width:540px;margin:0 auto 2.5rem;line-height:1.7}
+  .btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:.75rem 2rem;border-radius:4px;font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:all .2s}
+  .btn-primary{background:var(--red);color:#fff}
+  .btn-primary:hover{background:var(--red-light);box-shadow:0 0 28px var(--red-glow);transform:translateY(-1px)}
+  .btn-outline{border:1px solid rgba(255,255,255,0.2);color:var(--light)}
+  .btn-outline:hover{border-color:var(--red);color:var(--red);transform:translateY(-1px)}
+  .scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--muted);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;animation:bob 2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+  .scroll-hint::after{content:'';display:block;width:1px;height:32px;background:linear-gradient(to bottom,var(--muted),transparent)}
+
+  /* SECTIONS */
+  section{padding:6rem 2rem}
+  .section-inner{max-width:1100px;margin:0 auto}
+  .section-label{font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem;font-weight:600}
+  h2{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.02em;text-transform:uppercase;line-height:1.05;margin-bottom:1.2rem}
+  .divider{width:48px;height:3px;background:var(--red);margin-bottom:2rem}
+
+  /* ABOUT */
+  #about{background:var(--dark)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
+  @media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:2.5rem}}
+  .about-text p{color:#ccc;font-size:1.05rem;line-height:1.8;margin-bottom:1.2rem}
+  .about-text p strong{color:var(--light);font-weight:700}
+  .cert-card{background:var(--dark3);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:2rem;text-align:center}
+  .cert-card h3{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
+  .cert-name{font-size:1.6rem;font-weight:800;color:var(--light);margin-bottom:.4rem}
+  .cert-detail{color:var(--muted);font-size:.9rem;line-height:1.5}
+  .cert-badge{display:inline-block;background:var(--red);color:#fff;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .8rem;border-radius:2px;margin-top:1rem;font-weight:700}
+
+  /* SERVICES */
+  #services{background:var(--dark2)}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:3.5rem}
+  .service-card{background:var(--dark3);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:2rem;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+  .service-card:hover{border-color:var(--red);transform:translateY(-3px)}
+  .service-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 0%,rgba(192,57,43,0.08),transparent 70%);opacity:0;transition:opacity .3s}
+  .service-card:hover::before{opacity:1}
+  .service-icon{font-size:1.8rem;margin-bottom:1rem}
+  .service-card h3{font-size:1rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.6rem}
+  .service-card p{color:var(--muted);font-size:.9rem;line-height:1.6}
+
+  /* GEAR */
+  #gear{background:var(--dark)}
+  .gear-intro{color:#ccc;font-size:1rem;line-height:1.7;max-width:660px;margin-bottom:3.5rem}
+  .gear-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem}
+  .gear-group h3{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(192,57,43,0.3);font-weight:700}
+  .gear-group ul{list-style:none}
+  .gear-group li{color:#aaa;font-size:.9rem;padding:.28rem 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .gear-group li:last-child{border-bottom:none}
+
+  /* SAMPLES */
+  #samples{background:var(--dark2)}
+  .samples-intro{color:#ccc;max-width:660px;margin-bottom:3rem;font-size:1rem;line-height:1.7}
+  .audio-list{display:flex;flex-direction:column;gap:1rem;max-width:700px}
+  .audio-item{background:var(--dark3);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:1.2rem 1.5rem}
+  .audio-label{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
+  audio{width:100%;accent-color:var(--red);margin-top:.2rem}
+  .audio-placeholder{color:var(--muted);font-size:.85rem;font-style:italic}
+
+  /* CONTACT */
+  #contact{background:var(--dark);text-align:center}
+  .contact-inner{max-width:600px;margin:0 auto}
+  .contact-inner h2{margin-bottom:1rem}
+  .contact-inner p{color:var(--muted);margin-bottom:2.5rem}
+  .contact-links{display:flex;flex-direction:column;gap:.8rem;align-items:center;margin-bottom:3rem}
+  .contact-link{display:flex;align-items:center;gap:.75rem;color:var(--light);text-decoration:none;font-size:1.05rem;transition:color .2s}
+  .contact-link:hover{color:var(--red)}
+  .contact-link .icon{width:36px;height:36px;background:var(--dark3);border:1px solid rgba(255,255,255,0.1);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+
+  /* FOOTER */
+  footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,0.05);padding:2rem;text-align:center;color:var(--muted);font-size:.8rem;letter-spacing:.04em}
+  footer a{color:var(--muted);text-decoration:none}
+  footer a:hover{color:var(--red)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="logo">Incite<span>.</span>Studio</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gear">Gear</a></li>
+      <li><a href="#samples">Samples</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book a Session</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Wexford, Pennsylvania</p>
+    <h1>Incite<br><em>Studio</em></h1>
+    <p class="hero-sub">Professional recording, mixing, production, and songwriting — wherever you are in your creative process, we meet you there.</p>
+    <div class="btn-row">
+      <a href="#about" class="btn btn-primary">Explore Services</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">Our Story</p>
+    <h2>Built on<br>Experience</h2>
+    <div class="divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Founded in 2022, <strong>Incite Studio</strong> was built by Nathan Douds — a musician and engineer with <strong>over 25 years of professional performance experience</strong> and <strong>two music degrees</strong>.</p>
+        <p>His training spans recording, mixing, and music technology from graduate studies, as well as an intensive <strong>Mix With The Masters</strong> seminar in France, where he worked directly with world-renowned, Grammy-winning engineer <strong>Andrew Scheps</strong>.</p>
+        <p>Whether you're tracking a single or planning a full album, we work with you at every stage — from initial ideas through final release.</p>
+      </div>
+      <div class="cert-card">
+        <h3>Certified by</h3>
+        <div class="cert-name">Mix With The Masters</div>
+        <p class="cert-detail">La Fabrique, France<br>Conducted by Andrew Scheps</p>
+        <div class="cert-badge">Certificate of Completion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <p class="section-label">What We Offer</p>
+    <h2>Full-Service<br>Studio</h2>
+    <div class="divider"></div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🎙️</div>
+        <h3>Recording</h3>
+        <p>Premium microphones and preamps to capture accurate, transparent sound. A wide range of professional instruments on site — grand piano, multiple drum kits, and more.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎛️</div>
+        <h3>Mixing</h3>
+        <p>Detailed, high-end mix processing using industry-leading hardware and software. Your tracks treated with care and expertise at every level.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎼</div>
+        <h3>Production</h3>
+        <p>As hands-on or hands-off as you want. We provide musical guidance, arrangement ideas, and decision-making support — always in service of your vision.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎹</div>
+        <h3>Composition &amp; Songwriting</h3>
+        <p>Collaborative songwriting assistance and arranging. From melody and harmony to full orchestration — we help your ideas come to life.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎸</div>
+        <h3>On-Site Musicians</h3>
+        <p>Access to skilled session musicians available to track live instruments, adding depth and authenticity to your recordings.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎚️</div>
+        <h3>Mastering</h3>
+        <p>Final polish and loudness optimization for streaming, vinyl, or any other release format — ensuring your music sounds its best everywhere.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GEAR -->
+<section id="gear">
+  <div class="section-inner">
+    <p class="section-label">The Arsenal</p>
+    <h2>World-Class<br>Gear</h2>
+    <div class="divider"></div>
+    <p class="gear-intro">A partial list of the high-end equipment you'll encounter at Incite Studio.</p>
+    <div class="gear-cols">
+      <div class="gear-group">
+        <h3>I/O</h3>
+        <ul>
+          <li>Lynx Aurora AD/DA</li>
+        </ul>
+      </div>
+      <div class="gear-group">
+        <h3>Headphones &amp; Monitors</h3>
+        <ul>
+          <li>Focal Shape Twin</li>
+          <li>Audeze LCD-X</li>
+          <li>Beyerdynamic DT 900 PRO X</li>
+          <li>Audio-Technica MTH-series</li>
+          <li>Digital Audio Labs Personal Mixers</li>
+        </ul>
+      </div>
+      <div class="gear-group">
+        <h3>Preamps &amp; Outboard</h3>
+        <ul>
+          <li>Neve 1073 (×2)</li>
+          <li>Manley Core Channel Strip</li>
+          <li>Phoenix Audio (×8)</li>
+          <li>AEA RPQ2 (×2)</li>
+          <li>Grace Design M101 (×2)</li>
+          <li>Audioscape 76D (1176 Comp)</li>
+        </ul>
+      </div>
+      <div class="gear-group">
+        <h3>Microphones</h3>
+        <ul>
+          <li>Lauten Eden LT-386 (LD tube)</li>
+          <li>Lauten Atlantis FC-387 (FET)</li>
+          <li>Earthworks DM20, M30, SR25s, SR20LS</li>
+          <li>Telefunken M80-SH, M81-SH (×3), M82</li>
+          <li>Royer 121 (ribbon)</li>
+          <li>AEA R44CXE (ribbon)</li>
+          <li>Shure SM7b, SM57 (several)</li>
+          <li>Misc. Vintage Dynamics</li>
+        </ul>
+      </div>
+      <div class="gear-group">
+        <h3>Software</h3>
+        <ul>
+          <li>Reaper</li>
+          <li>Pro Tools</li>
+          <li>UAD Plugins</li>
+          <li>FabFilter Suite</li>
+          <li>Waves</li>
+          <li>Plugin Alliance</li>
+          <li>Various Amp Sims</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLES -->
+<section id="samples">
+  <div class="section-inner">
+    <p class="section-label">Listen</p>
+    <h2>Work<br>Samples</h2>
+    <div class="divider"></div>
+    <p class="samples-intro">Hear some of the work that's come out of Incite Studio. Audio samples can be embedded below — replace the placeholder items with your own audio files.</p>
+    <div class="audio-list">
+      <div class="audio-item">
+        <p class="audio-label">Sample 01 — Recording / Mix</p>
+        <p class="audio-placeholder">→ Replace this with: <code>&lt;audio controls src="sample1.mp3"&gt;&lt;/audio&gt;</code></p>
+      </div>
+      <div class="audio-item">
+        <p class="audio-label">Sample 02 — Production</p>
+        <p class="audio-placeholder">→ Replace this with: <code>&lt;audio controls src="sample2.mp3"&gt;&lt;/audio&gt;</code></p>
+      </div>
+      <div class="audio-item">
+        <p class="audio-label">Sample 03 — Full Session</p>
+        <p class="audio-placeholder">→ Replace this with: <code>&lt;audio controls src="sample3.mp3"&gt;&lt;/audio&gt;</code></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <p class="section-label">Get in Touch</p>
+      <h2>Let's Make<br>Something</h2>
+      <div class="divider" style="margin:1.2rem auto 1.5rem"></div>
+      <p>Ready to start your project? Reach out and let's talk about what you're working on.</p>
+      <div class="contact-links">
+        <a href="mailto:nathan@incite-studio.com" class="contact-link">
+          <span class="icon">✉️</span>
+          nathan@incite-studio.com
+        </a>
+        <a href="tel:7242527608" class="contact-link">
+          <span class="icon">📞</span>
+          (724) 252-7608
+        </a>
+      </div>
+      <a href="mailto:nathan@incite-studio.com" class="btn btn-primary" style="font-size:1rem;padding:.9rem 2.5rem">Book a Session</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Incite Studio · Wexford, Pennsylvania · <a href="mailto:nathan@incite-studio.com">nathan@incite-studio.com</a></p>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const ham = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  ham.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navAs = document.querySelectorAll('.nav-links a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navAs.forEach(a => {
+          a.style.color = a.getAttribute('href') === '#' + e.target.id ? 'var(--light)' : '';
+        });
+      }
+    });
+  }, {threshold: 0.4});
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
