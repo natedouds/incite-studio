@@ -407,7 +407,7 @@
   <p>© 2025 Incite Studio · Wexford, Pennsylvania · <a href="mailto:nathan@incite-studio.com">nathan@incite-studio.com</a></p>
 </footer>
 
-<audio id="audioEl" crossorigin="anonymous"></audio>
+<audio id="audioEl"></audio>
 
 <script>
 // ── Tracks ──────────────────────────────────────────────────────────────────
@@ -517,7 +517,7 @@ audio.addEventListener('ended', next);
 
 // ── Pre-load durations ────────────────────────────────────────────────────────
 TRACKS.forEach((t,i) => {
-  const tmp=new Audio(); tmp.crossOrigin='anonymous'; tmp.preload='metadata';
+  const tmp=new Audio(); tmp.preload='metadata';
   tmp.addEventListener('loadedmetadata', ()=>{ durations[i]=fmt(tmp.duration); renderList(); });
   tmp.src=t.url;
 });
